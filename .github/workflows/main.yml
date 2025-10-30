@@ -13,6 +13,8 @@
 
 
 
+name: My GitHub Actions Pipeline
+
 on:
   push:
     branches: [ main ]
@@ -22,8 +24,18 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-    - name: Build code
-      run: <BUILD>
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build project
+      run: npm run build
